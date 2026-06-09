@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tilastokeskuksen rikosdata – interaktiivinen selain</title>
+  <meta name="description" content="Staattinen GitHub Pages -työkalu Tilastokeskuksen seksuaali-, väkivalta- ja lähisuhdeväkivaltarikoksia koskevien PxWeb-taulukoiden tutkimiseen." />
+  <style>
+    :root{--bg:#0b1020;--panel:#121a32;--panel2:#17213f;--text:#edf2ff;--muted:#aeb9d6;--brand:#66e3c4;--brand2:#91b4ff;--warn:#ffd166;--line:#2a365e;--bad:#ff8fab;--good:#6ee7b7;--shadow:0 20px 60px rgba(0,0,0,.35)}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at top left,#1d2a55 0,#0b1020 36rem),var(--bg);color:var(--text);line-height:1.55} a{color:var(--brand2)}
+    header{padding:4rem 1.25rem 2rem;max-width:1180px;margin:auto}.eyebrow{color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}h1{font-size:clamp(2rem,6vw,4.8rem);line-height:1.02;margin:.5rem 0 1rem;max-width:980px}.lead{font-size:clamp(1.05rem,2vw,1.35rem);color:var(--muted);max-width:920px}.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}.btn{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--text);padding:.8rem 1rem;border-radius:999px;text-decoration:none;font-weight:750;box-shadow:var(--shadow)}.btn.primary{background:linear-gradient(135deg,#21c7a8,#5f8fff);color:#06111c;border:0}.wrap{max-width:1180px;margin:auto;padding:0 1.25rem 4rem}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}.card{grid-column:span 12;background:rgba(18,26,50,.84);border:1px solid var(--line);border-radius:24px;padding:1.15rem;box-shadow:var(--shadow);backdrop-filter:blur(10px)}@media(min-width:850px){.span4{grid-column:span 4}.span5{grid-column:span 5}.span7{grid-column:span 7}.span8{grid-column:span 8}.span6{grid-column:span 6}}
+    h2{font-size:1.55rem;margin:.2rem 0 .8rem}h3{font-size:1.05rem;margin:1rem 0 .4rem}.muted{color:var(--muted)}.pill{display:inline-block;padding:.22rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.82rem;margin:.12rem}.note{border-left:4px solid var(--warn);padding:.85rem 1rem;background:rgba(255,209,102,.1);border-radius:14px;color:#ffe7a3}.good{border-left-color:var(--good);background:rgba(110,231,183,.1);color:#cafce8}.bad{border-left-color:var(--bad);background:rgba(255,143,171,.1);color:#ffd3df}
+    label{display:block;font-weight:800;margin:.65rem 0 .25rem}select,input,button,textarea{width:100%;border:1px solid var(--line);background:#0d1429;color:var(--text);border-radius:14px;padding:.72rem;font:inherit}select[multiple]{min-height:9rem}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}.inline{display:flex;gap:.55rem;align-items:center}.inline>*{flex:1}button{cursor:pointer;font-weight:850;background:linear-gradient(135deg,#26d0b0,#779cff);color:#06111c;border:0}.secondary{background:#0d1429;color:var(--text);border:1px solid var(--line)}.small{font-size:.88rem}.status{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{border-bottom:1px solid var(--line);padding:.55rem;text-align:left;vertical-align:top}th{position:sticky;top:0;background:#111a34;z-index:1}.table-wrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:16px}.catalog{display:grid;gap:.65rem}.dataset{padding:.85rem;border:1px solid var(--line);border-radius:16px;background:rgba(13,20,41,.78)}.dataset strong{display:block}.links{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.5rem}.links a{font-size:.82rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.25rem .55rem}.chartbox{height:360px;border:1px solid var(--line);border-radius:18px;padding:.8rem;background:#0d1429}canvas{width:100%;height:100%}.footer{color:var(--muted);padding-top:2rem}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#091026;border:1px solid var(--line);border-radius:8px;padding:.1rem .35rem}.tagrow{margin:.6rem 0}.hidden{display:none}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.download{margin-top:.8rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}.download a,.download button{border-radius:14px;text-align:center;text-decoration:none;padding:.7rem}.count{font-weight:900;color:var(--brand)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Staattinen avoimen datan työkalu · Tilastokeskus PxWeb</div>
+    <h1>Seksuaali-, väkivalta- ja lähisuhdeväkivaltarikosten julkinen tilastodata yhdessä sivussa</h1>
+    <p class="lead">Tämä GitHub Pages -yhteensopiva HTML-sivu hakee Tilastokeskuksen avoimesta PxWeb-rajapinnasta aggregoitua dataa. Työkalu on tarkoitettu ilmiöiden, aikasarjojen ja taustamuuttujien tarkasteluun – ei yksilöiden profilointiin tai ryhmien leimaamiseen.</p>
+    <div class="hero-actions"><a class="btn primary" href="#tyokalu">Avaa datatyökalu</a><a class="btn" href="#aineistot">Katso rajapinnat ja latauslinkit</a><a class="btn" href="https://stat.fi/fi/palvelut/tilastodatapalvelut/avoin-data-ja-rajapinnat/tietokantojen-rajapintakaytto" target="_blank" rel="noreferrer">Tilastokeskuksen API-ohje</a></div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid" aria-label="Huomautukset">
+      <article class="card span7">
+        <h2>Mitä tällä voi selvittää?</h2>
+        <p>Voit vertailla esimerkiksi rikosryhmiä, vuosia, ikäryhmiä, sukupuolta, syntyperää, taustamaata, kansalaisuutta, koulutusta, sosioekonomista asemaa, tulo­desiiliä, uhrin ja epäillyn suhdetta sekä asianomistaja-/uhrinäkökulmaa niiltä osin kuin muuttujat ovat julkisissa taulukoissa.</p>
+        <div class="tagrow"><span class="pill">seksuaalirikokset</span><span class="pill">väkivaltarikokset</span><span class="pill">perhe- ja lähisuhdeväkivalta</span><span class="pill">syntyperä</span><span class="pill">kansalaisuus</span><span class="pill">koulutus</span><span class="pill">tulot</span><span class="pill">uhrit</span><span class="pill">asianomistajat</span></div>
+      </article>
+      <aside class="card span5">
+        <h2>Tulkinnan rajat</h2>
+        <p class="note">Tilastot kuvaavat viranomaisten tietoon tulleita tai selvitettyihin rikoksiin liittyviä epäiltyjä. Ne eivät yksin osoita kausaalisuutta. Vertailussa kannattaa käyttää väestöön suhteutettuja mittareita, huomioida ikä- ja sukupuolirakenne, ilmoitusalttius, rikoslakimuutokset ja pienet havaintomäärät.</p>
+      </aside>
+    </section>
+
+    <section id="tyokalu" class="card" style="margin-top:1rem">
+      <h2>Interaktiivinen PxWeb-selain</h2>
+      <p class="muted">Valitse taulukko, lataa muuttujat ja rajaa kysely. Sivu muodostaa PxWeb API -kyselyn selaimessa ja näyttää tuloksen taulukkona sekä yksinkertaisena pylväskaaviona.</p>
+      <div class="controls">
+        <div><label for="datasetSelect">Aineisto</label><select id="datasetSelect"></select></div>
+        <div><label for="presetSelect">Pikasuodatus</label><select id="presetSelect"><option value="sexualViolence">Seksuaali- ja väkivaltarikokset</option><option value="intimate">Perhe- ja lähisuhdeväkivalta</option><option value="all">Ei rikosnimikesuodatusta</option></select></div>
+        <div><label for="maxCells">Soluraja</label><input id="maxCells" type="number" min="100" max="20000" value="5000"></div>
+      </div>
+      <div class="inline" style="margin:.8rem 0"><button id="loadMeta">1. Lataa muuttujat</button><button id="runQuery" class="secondary">2. Hae data</button></div>
+      <div id="metaArea" class="controls"></div>
+      <div class="download hidden" id="downloadArea"><button id="downloadJson" class="secondary">Lataa tulos JSON</button><button id="downloadCsv" class="secondary">Lataa tulos CSV</button><a id="pxLink" class="btn" target="_blank" rel="noreferrer">Avaa PxWebissä</a></div>
+      <p id="status" class="status">Valitse aineisto ja lataa muuttujat.</p>
+    </section>
+
+    <section class="grid" style="margin-top:1rem">
+      <article class="card span5"><h2>Kaavio</h2><div class="chartbox"><canvas id="chart" width="900" height="420" aria-label="Tuloskaavio"></canvas></div><p class="muted small">Kaavio näyttää valitun tuloksen ensimmäiset summatut sarjat. Tarkat arvot ovat taulukossa ja ladattavassa CSV/JSON-tiedostossa.</p></article>
+      <article class="card span7"><h2>Tulostaulukko <span id="rowCount" class="count"></span></h2><div class="table-wrap"><table id="resultTable"><thead></thead><tbody></tbody></table></div></article>
+    </section>
+
+    <section id="aineistot" class="card" style="margin-top:1rem">
+      <h2>Julkiset rajapinnat ja ladattavat aineistot</h2>
+      <p>Alla on koottu rikos- ja pakkokeinotilaston taulukot, jotka ovat olennaisia seksuaali- ja väkivaltarikosten, uhrien, asianomistajien, epäiltyjen ja taustamuuttujien tarkasteluun. Jokaisella taulukolla on PxWeb-käyttöliittymä sekä REST API -osoite. PxWeb-käyttöliittymästä datan voi ladata mm. CSV-, XLSX-, PX- ja JSON-stat-muodoissa valinnan jälkeen; API palauttaa JSON-stat2-muotoa tämän sivun kyselyissä.</p>
+      <div id="catalog" class="catalog"></div>
+    </section>
+
+    <section class="grid" style="margin-top:1rem">
+      <article class="card span6"><h2>Menetelmävinkit</h2><ul><li>Käytä suhteutettuja lukuja, kun taulukko tarjoaa <span class="kbd">10 000 asukasta kohden</span> -mittarin.</li><li>Älä vertaa pelkkiä lukumääriä ilman väestöosuuksia ja ikärakennetta.</li><li>Tarkista rikosnimikkeiden lakimuutokset, etenkin seksuaalirikoslainsäädännön uudistukset.</li><li>Erottele epäilty, syylliseksi epäilty, uhri ja asianomistaja: ne ovat eri tilastoyksiköitä.</li><li>Pienissä ryhmissä satunnaisvaihtelu on suurta; käytä usean vuoden jaksoja tai liukuvia keskiarvoja.</li></ul></article>
+      <article class="card span6"><h2>Tekninen toteutus</h2><p>Sivu on yksi staattinen <span class="kbd">index.html</span>-tiedosto: ei palvelinta, ei evästeitä, ei seurantaa. Kaikki kyselyt tehdään suoraan käyttäjän selaimesta Tilastokeskuksen PxWeb APIin.</p><p class="muted small">Jos selain estää CORS-pyynnön tai organisaation verkko estää API-kutsun, avaa taulukko PxWeb-linkistä ja lataa data käyttöliittymän kautta.</p></article>
+    </section>
+    <p class="footer">Lähteet: Tilastokeskus / StatFin / Rikos- ja pakkokeinotilasto sekä Tilastokeskuksen PxWeb API -ohje. Päivitetty tämän sivun lähdekoodiin 2026-06-09.</p>
+  </main>
+
+<script>
+const BASE_API = 'https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/rpk/';
+const BASE_UI = 'https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__rpk/';
+const datasets = [
+  ['13ex','Tietoon tulleet rikokset ja niiden selvittäminen rikosryhmittäin tekokunnan ja ilmoitusvuoden mukaan','yleiskuva, kunta, rikosryhmä'],
+  ['13fr','Eräiden rikosten uhrit iän, sukupuolen, hyvinvointialueittain laskentatavan ja rikoksen ilmoitusvuoden mukaan','uhrit, ikä, sukupuoli, alue'],
+  ['13h5','Selvitettyihin rikoksiin syylliseksi epäillyt pääasiallisen toiminnan mukaan','epäillyt, työmarkkina-asema'],
+  ['13ha','Selvitettyihin rikoksiin syylliseksi epäillyt koulutuksen mukaan','epäillyt, koulutusaste'],
+  ['13he','Selvitettyihin rikoksiin syylliseksi epäillyt sosioekonomisen aseman mukaan','epäillyt, sosioekonominen asema'],
+  ['13je','Selvitettyihin rikoksiin syylliseksi epäillyt kansalaisuuden, hyvinvointialueen ja asuinmaan mukaan','epäillyt, kansalaisuus, asuinmaa, alue'],
+  ['13jg','Vakituisesti Suomessa asuvat kansalaisuuden ja hyvinvointialueen mukaan 10 000 asukasta kohden','epäillyt suhteutettuna väestöön'],
+  ['13jm','Rikosten asianomistajat sukupuolen, iän, hyvinvointialueen ja ilmoitusvuoden mukaan','asianomistajat'],
+  ['13k7','Selvitettyihin rikoksiin syylliseksi epäillyt käytettävissä olevien tulojen mukaan','epäillyt, tulodesiili'],
+  ['13kr','Selvitettyihin rikoksiin syylliseksi epäillyt ICCS-luokituksen, iän, sukupuolen ja kansalaisuuden mukaan','ICCS, kansainvälinen vertailu'],
+  ['13kv','Rikosten uhrit ja asianomistajat ICCS-luokituksen, iän ja sukupuolen mukaan','uhrit/asianomistajat, ICCS'],
+  ['13ne','Eräisiin rikoksiin epäillyt uhrin iän ja sukupuolen sekä ilmoitusvuoden mukaan','uhri ja epäilty samassa taulussa'],
+  ['13rc','Perhe- ja lähisuhdeväkivallan uhrit sukupuolen, iän, rikosnimikkeen, suhteen ja asumismuodon mukaan','lähisuhdeväkivalta, uhrit, suhde'],
+  ['13rd','Perhe- ja lähisuhdeväkivallan uhrit sukupuolen, iän ja hyvinvointialueen mukaan','lähisuhdeväkivalta, uhrit, alue'],
+  ['13rf','Perhe- ja lähisuhdeväkivaltaan epäillyt uhrin iän ja sukupuolen sekä ilmoitusvuoden mukaan','lähisuhdeväkivalta, epäillyt ja uhrit'],
+  ['13yr','Selvitettyihin rikoksiin syylliseksi epäillyt kansalaisuuden, iän ja asuinmaan mukaan','kansalaisuus, asuinmaa, lukumäärät'],
+  ['13yy','Vakituisesti Suomessa asuvat kansalaisuuden, iän ja sukupuolen mukaan 10 000 asukasta kohden','kansalaisuus, suhteutettu väestöön'],
+  ['13z4','Selvitettyihin rikoksiin syylliseksi epäillyt syntyperän, iän ja taustamaan mukaan','syntyperä, taustamaa'],
+  ['13zk','Selvitettyihin rikoksiin syylliseksi epäillyt syntyperän, sukupuolen ja iän mukaan','syntyperä, sukupuoli'],
+  ['141k','Eräiden rikosten uhrit iän, sukupuolen ja syntyperän mukaan','uhrit, syntyperä'],
+  ['14cf','Perhe- ja lähisuhdeväkivallan uhrit syntyperän, sukupuolen, iän, rikosnimikkeen ja suhteen mukaan','lähisuhdeväkivalta, uhrit, syntyperä'],
+  ['14pd','Tietoon tulleisiin rikoksiin epäillyt iän, sukupuolen ja syntyperän mukaan','epäillyt myös selvittämättömissä, syntyperä'],
+  ['157p','Viranomaisten tietoon tullut perheväkivalta, ilmoitetut ja selvitetyt rikokset sekä tutkinta-aika','perheväkivalta, prosessi']
+].map(([id,title,tags])=>({id,title,tags,api:`${BASE_API}statfin_rpk_pxt_${id}.px`,ui:`${BASE_UI}statfin_rpk_pxt_${id}.px/`}));
+let metadata=null, rows=[], lastQuery=null;
+const $=id=>document.getElementById(id);
+function init(){ datasets.forEach(d=>{ const o=document.createElement('option'); o.value=d.id; o.textContent=`${d.id} – ${d.title}`; $('datasetSelect').appendChild(o); }); renderCatalog(); $('loadMeta').onclick=loadMeta; $('runQuery').onclick=runData; $('downloadJson').onclick=()=>download('rikosdata.json', JSON.stringify({query:lastQuery,rows},null,2),'application/json'); $('downloadCsv').onclick=()=>download('rikosdata.csv', toCsv(rows),'text/csv;charset=utf-8'); }
+function ds(){return datasets.find(d=>d.id===$('datasetSelect').value)}
+function renderCatalog(){ $('catalog').innerHTML=datasets.map(d=>`<div class="dataset"><strong>${d.id} – ${escapeHtml(d.title)}</strong><div class="muted small">${escapeHtml(d.tags)}</div><div class="links"><a href="${d.ui}" target="_blank" rel="noreferrer">PxWeb ja lataus</a><a href="${d.api}" target="_blank" rel="noreferrer">API metadata</a></div></div>`).join(''); }
+async function loadMeta(){ setStatus('Ladataan metatietoja…'); metadata=null; rows=[]; drawTable([]); try{ const r=await fetch(ds().api); if(!r.ok) throw new Error(`${r.status} ${r.statusText}`); metadata=await r.json(); renderFilters(); $('pxLink').href=ds().ui; $('downloadArea').classList.remove('hidden'); setStatus(`Metatiedot ladattu: ${metadata.variables.length} muuttujaa. Rajaa valinnat ja hae data.`); }catch(e){ setStatus(`Virhe metatietojen latauksessa: ${e.message}\nKokeile PxWeb-linkkiä tai tarkista selaimen CORS/verkkorajoitukset.`); }}
+function renderFilters(){ const area=$('metaArea'); area.innerHTML=''; for(const v of metadata.variables){ const box=document.createElement('div'); const label=document.createElement('label'); label.textContent=`${v.text || v.code} (${v.values.length})`; box.appendChild(label); const sel=document.createElement('select'); sel.multiple=true; sel.dataset.code=v.code; const defaults=defaultValues(v); for(let i=0;i<v.values.length;i++){ const opt=document.createElement('option'); opt.value=v.values[i]; opt.textContent=v.valueTexts?.[i] || v.values[i]; opt.selected=defaults.includes(v.values[i]); sel.appendChild(opt); } box.appendChild(sel); const hint=document.createElement('div'); hint.className='muted small'; hint.textContent='Ctrl/Cmd valitsee useita. Oletus rajaa kyselyn turvallisen kokoiseksi.'; box.appendChild(hint); area.appendChild(box); }}
+function defaultValues(v){ const texts=v.valueTexts||v.values; const code=(v.code+' '+(v.text||'')).toLowerCase(); if(code.includes('vuosi') || code.includes('ilmoitus')) return v.values.slice(-3); if(code.includes('tiedot')){ const i=texts.findIndex(t=>/10 ?000|kohden|liukuva/i.test(t)); if(i>=0) return [v.values[i]]; return [v.values[0]]; } if(/rikos|iccs/.test(code)) return pickCrime(v); if(code.includes('sukupuoli')||code.includes('ikä')||code.includes('kunta')||code.includes('alue')||code.includes('asuin')||code.includes('suhde')||code.includes('asumismuoto')) return [v.values[0]]; if(code.includes('syntyper')||code.includes('kansalais')||code.includes('taustamaa')||code.includes('koulutus')||code.includes('sosio')||code.includes('desiili')||code.includes('toiminta')) return v.values.slice(0, Math.min(8,v.values.length)); return [v.values[0]]; }
+function pickCrime(v){ const preset=$('presetSelect').value; const words=preset==='intimate' ? /(perhe|lähi|pahoinpitely|seksuaali|raiskaus)/i : preset==='all' ? /./ : /(seksuaali|raiskaus|ahdistel|hyväksikäyttö|väkival|pahoinpitely|henkeen|terveyteen)/i; const out=[]; (v.valueTexts||[]).forEach((t,i)=>{ if(words.test(t) && out.length<12) out.push(v.values[i]); }); return out.length ? out : [v.values[0]]; }
+async function runData(){ if(!metadata) return setStatus('Lataa ensin muuttujat.'); const query=[]; let cells=1; document.querySelectorAll('#metaArea select').forEach(sel=>{ const values=[...sel.selectedOptions].map(o=>o.value); cells*=Math.max(values.length,1); query.push({code:sel.dataset.code,selection:{filter:'item',values}}); }); const max=Number($('maxCells').value)||5000; if(cells>max) return setStatus(`Kysely olisi ${cells.toLocaleString('fi-FI')} solua, yli rajan ${max}. Rajaa muuttujia tai nosta solurajaa.`); lastQuery={query,response:{format:'json-stat2'}}; setStatus(`Haetaan ${cells.toLocaleString('fi-FI')} solua…`); try{ const r=await fetch(ds().api,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(lastQuery)}); if(!r.ok) throw new Error(`${r.status} ${await r.text()}`); const data=await r.json(); rows=jsonStatRows(data); drawTable(rows); drawChart(rows); setStatus(`Valmis. ${rows.length.toLocaleString('fi-FI')} riviä. Lähde: ${ds().title}`); }catch(e){ setStatus(`Virhe datan haussa: ${e.message}`); }}
+function jsonStatRows(data){ const ids=data.id || Object.keys(data.dimension); const sizes=data.size || ids.map(id=>data.dimension[id].category.index.length); const vals=Array.isArray(data.value)?data.value:Object.values(data.value||{}); const dims=ids.map(id=>{ const d=data.dimension[id]; const labels=d.category.label||{}; const index=d.category.index||{}; const byPos=[]; Object.entries(index).forEach(([k,pos])=>byPos[pos]=labels[k]||k); return {id,label:d.label||id,items:byPos}; }); const out=[]; for(let n=0;n<vals.length;n++){ let rem=n; const row={Arvo: vals[n]}; for(let i=dims.length-1;i>=0;i--){ const pos=rem%sizes[i]; rem=Math.floor(rem/sizes[i]); row[dims[i].label]=dims[i].items[pos]; } out.push(row); } return out.filter(r=>r.Arvo!==null && r.Arvo!==undefined); }
+function drawTable(data){ $('rowCount').textContent=data.length?`(${data.length})`:''; const head=$('resultTable').querySelector('thead'), body=$('resultTable').querySelector('tbody'); head.innerHTML=body.innerHTML=''; if(!data.length) return; const cols=Object.keys(data[0]).filter(c=>c!=='Arvo').concat('Arvo'); head.innerHTML='<tr>'+cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('')+'</tr>'; body.innerHTML=data.slice(0,1000).map(r=>'<tr>'+cols.map(c=>`<td>${escapeHtml(r[c])}</td>`).join('')+'</tr>').join(''); }
+function drawChart(data){ const c=$('chart'), ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height); ctx.fillStyle='#aeb9d6'; ctx.font='16px sans-serif'; if(!data.length){ctx.fillText('Ei dataa',30,40);return;} const labelCols=Object.keys(data[0]).filter(k=>k!=='Arvo'); const groupCol=labelCols.find(k=>/syntyper|kansalais|koulutus|desiili|sosio|sukupuoli|rikos/i.test(k)) || labelCols[labelCols.length-1]; const sums=new Map(); data.forEach(r=>{ const key=String(r[groupCol]||'Yhteensä').slice(0,60); sums.set(key,(sums.get(key)||0)+(Number(r.Arvo)||0)); }); const arr=[...sums.entries()].sort((a,b)=>b[1]-a[1]).slice(0,12); const max=Math.max(...arr.map(x=>x[1]),1); const left=220, top=25, barH=24, gap=8, width=c.width-left-40; ctx.font='13px sans-serif'; arr.forEach(([k,v],i)=>{ const y=top+i*(barH+gap); ctx.fillStyle='#aeb9d6'; ctx.fillText(k,12,y+17); ctx.fillStyle='#66e3c4'; ctx.fillRect(left,y,width*(v/max),barH); ctx.fillStyle='#edf2ff'; ctx.fillText(new Intl.NumberFormat('fi-FI',{maximumFractionDigits:2}).format(v),left+width*(v/max)+8,y+17); }); }
+function toCsv(data){ if(!data.length) return ''; const cols=Object.keys(data[0]); return [cols.join(';'),...data.map(r=>cols.map(c=>`"${String(r[c]??'').replaceAll('"','""')}"`).join(';'))].join('\n'); }
+function download(name, content, type){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([content],{type})); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+function setStatus(s){ $('status').textContent=s; } function escapeHtml(x){ return String(x??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+init();
+</script>
+</body>
+</html>
